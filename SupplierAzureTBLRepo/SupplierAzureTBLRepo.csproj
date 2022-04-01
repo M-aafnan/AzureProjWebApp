@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="RestSharp" Version="107.3.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\SupplierRepoModels_AzureTBL\SupplierRepoModels_AzureTBL\SupplierRepoModels_AzureTBL.csproj" />
+  </ItemGroup>
+
+</Project>

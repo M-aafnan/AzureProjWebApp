@@ -1,0 +1,1430 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="SchoolManagmentModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Attendance">
+          <Key>
+            <PropertyRef Name="AttendanceID" />
+          </Key>
+          <Property Name="AttendanceID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Class" Type="nchar" MaxLength="20" />
+          <Property Name="Session" Type="nchar" MaxLength="10" />
+          <Property Name="Section" Type="nchar" MaxLength="10" />
+          <Property Name="SubjectCode" Type="nchar" MaxLength="20" />
+          <Property Name="StaffID" Type="nchar" MaxLength="15" />
+          <Property Name="AttendanceDate" Type="datetime" />
+          <Property Name="AdmissionNo" Type="nchar" MaxLength="15" />
+          <Property Name="Status" Type="nchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="Book">
+          <Key>
+            <PropertyRef Name="AccessionNo" />
+          </Key>
+          <Property Name="AccessionNo" Type="nchar" MaxLength="30" Nullable="false" />
+          <Property Name="BookTitle" Type="nchar" MaxLength="30" />
+          <Property Name="Author" Type="nchar" MaxLength="30" />
+          <Property Name="JointAuthors" Type="nchar" MaxLength="30" />
+          <Property Name="Subject" Type="nchar" MaxLength="30" />
+          <Property Name="Department" Type="nchar" MaxLength="30" />
+          <Property Name="Barcode" Type="nchar" MaxLength="70" />
+          <Property Name="ISBN" Type="nchar" MaxLength="30" />
+          <Property Name="Volume" Type="nchar" MaxLength="30" />
+          <Property Name="Edition" Type="nchar" MaxLength="30" />
+          <Property Name="Publisher" Type="nchar" MaxLength="30" />
+          <Property Name="PlaceOfPublisher" Type="nchar" MaxLength="30" />
+          <Property Name="CD" Type="nchar" MaxLength="10" />
+          <Property Name="PublishingYear" Type="int" />
+          <Property Name="Reference" Type="nchar" MaxLength="10" />
+          <Property Name="AlmiraPosition" Type="nchar" MaxLength="30" />
+          <Property Name="Price" Type="int" />
+          <Property Name="SupplierName" Type="nchar" MaxLength="30" />
+          <Property Name="BillDate" Type="datetime" />
+          <Property Name="Remarks" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="BookIssueStaff">
+          <Key>
+            <PropertyRef Name="TransactionID" />
+          </Key>
+          <Property Name="TransactionID" Type="nchar" MaxLength="15" Nullable="false" />
+          <Property Name="IssueDate" Type="datetime" />
+          <Property Name="DueDate" Type="datetime" />
+          <Property Name="AccessionNo" Type="nchar" MaxLength="30" />
+          <Property Name="StaffID" Type="nchar" MaxLength="15" />
+          <Property Name="Status" Type="nchar" MaxLength="30" />
+        </EntityType>
+        <EntityType Name="BookReturnStudent">
+          <Key>
+            <PropertyRef Name="ReturnID" />
+          </Key>
+          <Property Name="ReturnID" Type="nchar" MaxLength="15" Nullable="false" />
+          <Property Name="TransactionID" Type="nchar" MaxLength="15" />
+          <Property Name="ReturnDate" Type="datetime" />
+          <Property Name="Fine" Type="int" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'SchoolManagment.dbo.BusHolders' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="BusHolders">
+          <Property Name="AdmissionNo" Type="nchar" MaxLength="15" />
+          <Property Name="SourceLocation" Type="varchar" MaxLength="250" />
+          <Property Name="StartingDate" Type="nchar" MaxLength="30" />
+        </EntityType>-->
+        <EntityType Name="Class">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ClassName" Type="nchar" MaxLength="20" />
+          <Property Name="Section" Type="nchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="CourseFee">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ClassID" Type="int" />
+          <Property Name="FeeID" Type="int" />
+          <Property Name="Fee" Type="float" />
+          <Property Name="Month" Type="nchar" MaxLength="30" />
+        </EntityType>
+        <EntityType Name="Department">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DepartmentName" Type="varchar" MaxLength="250" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="StaffID" />
+          </Key>
+          <Property Name="StaffID" Type="nchar" MaxLength="15" Nullable="false" />
+          <Property Name="StaffName" Type="nchar" MaxLength="30" />
+          <Property Name="FatherName" Type="nchar" MaxLength="30" />
+          <Property Name="MotherName" Type="nchar" MaxLength="30" />
+          <Property Name="DOB" Type="nchar" MaxLength="20" />
+          <Property Name="PermanentAddress" Type="varchar" MaxLength="100" />
+          <Property Name="TemporaryAddress" Type="varchar" MaxLength="100" />
+          <Property Name="PhoneNo" Type="nchar" MaxLength="10" />
+          <Property Name="MobileNo" Type="nchar" MaxLength="10" />
+          <Property Name="DateOfJoining" Type="nchar" MaxLength="30" />
+          <Property Name="Qualification" Type="nchar" MaxLength="70" />
+          <Property Name="YearOfExperience" Type="nchar" MaxLength="50" />
+          <Property Name="Designation" Type="varchar" MaxLength="100" />
+          <Property Name="Email" Type="nchar" MaxLength="30" />
+          <Property Name="Picture" Type="image" />
+          <Property Name="Status" Type="nchar" MaxLength="15" />
+          <Property Name="BasicSalary" Type="int" />
+          <Property Name="Department" Type="varchar" MaxLength="100" />
+          <Property Name="Gender" Type="nchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="Event">
+          <Key>
+            <PropertyRef Name="EventID" />
+          </Key>
+          <Property Name="EventID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EventName" Type="nchar" MaxLength="150" />
+          <Property Name="StartingDate" Type="nchar" MaxLength="30" />
+          <Property Name="StartingTime" Type="nchar" MaxLength="20" />
+          <Property Name="EndingDate" Type="nchar" MaxLength="30" />
+          <Property Name="EndingTime" Type="nchar" MaxLength="20" />
+          <Property Name="ManagedBy" Type="nchar" MaxLength="250" />
+          <Property Name="Activities" Type="nchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="Exams">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ExamName" Type="nchar" MaxLength="30" />
+          <Property Name="ExamType" Type="nchar" MaxLength="30" />
+        </EntityType>
+        <EntityType Name="Fee">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Feename" Type="varchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="Grades">
+          <Key>
+            <PropertyRef Name="GradeID" />
+          </Key>
+          <Property Name="GradeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Grade" Type="nvarchar" MaxLength="50" />
+          <Property Name="ScoreFrom" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="ScoreTo" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Remark" Type="nvarchar" MaxLength="250" />
+          <Property Name="GradePoint" Type="decimal" Precision="18" Scale="2" />
+        </EntityType>
+        <EntityType Name="HostelFeePayment">
+          <Key>
+            <PropertyRef Name="HFeePaymentID" />
+          </Key>
+          <Property Name="HFeePaymentID" Type="nchar" MaxLength="15" Nullable="false" />
+          <Property Name="AdmissionNo" Type="nchar" MaxLength="15" />
+          <Property Name="TotalPaid" Type="int" />
+          <Property Name="ModeOfPayment" Type="nchar" MaxLength="100" />
+          <Property Name="PaymentModeDetails" Type="varchar" MaxLength="200" />
+          <Property Name="Fine" Type="int" />
+          <Property Name="DueFees" Type="int" />
+          <Property Name="Dateofpayment" Type="nchar" MaxLength="30" />
+          <Property Name="HostelFees" Type="int" />
+        </EntityType>
+        <EntityType Name="HostelInfo">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="Hostelname" Type="nchar" MaxLength="150" Nullable="false" />
+          <Property Name="Hostel_Address" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="Hostel_Phone" Type="nchar" MaxLength="15" Nullable="false" />
+          <Property Name="ManagedBy" Type="nchar" MaxLength="100" />
+          <Property Name="Hostel_ContactNo" Type="nchar" MaxLength="15" />
+          <Property Name="HostelFees" Type="int" />
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MarksEntry">
+          <Key>
+            <PropertyRef Name="M_ID" />
+          </Key>
+          <Property Name="M_ID" Type="int" Nullable="false" />
+          <Property Name="AdmissionNo" Type="nchar" MaxLength="50" />
+          <Property Name="StudentSchool" Type="nvarchar" MaxLength="250" />
+          <Property Name="Session" Type="nvarchar" MaxLength="100" />
+          <Property Name="StudentClass" Type="nvarchar" MaxLength="150" />
+          <Property Name="StudentSection" Type="nvarchar" MaxLength="100" />
+          <Property Name="EntryDate" Type="datetime" />
+          <Property Name="Result" Type="nchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="Scholarship">
+          <Key>
+            <PropertyRef Name="ScholarshipID" />
+          </Key>
+          <Property Name="ScholarshipID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ScholarshipName" Type="nchar" MaxLength="30" />
+          <Property Name="Description" Type="varchar" MaxLength="200" />
+          <Property Name="Amount" Type="nchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="School">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SchoolName" Type="varchar" MaxLength="250" />
+          <Property Name="Address" Type="varchar" MaxLength="250" />
+          <Property Name="ContactNo" Type="nchar" MaxLength="15" />
+          <Property Name="Email" Type="nchar" MaxLength="30" />
+          <Property Name="Fax" Type="nchar" MaxLength="50" />
+          <Property Name="Website" Type="nchar" MaxLength="60" />
+        </EntityType>
+        <EntityType Name="Student">
+          <Key>
+            <PropertyRef Name="AdmissionNo" />
+          </Key>
+          <Property Name="AdmissionNo" Type="nchar" MaxLength="15" Nullable="false" />
+          <Property Name="EnrollmentNo" Type="nchar" MaxLength="15" />
+          <Property Name="StudentName" Type="nchar" MaxLength="100" />
+          <Property Name="FatherName" Type="nchar" MaxLength="100" />
+          <Property Name="MotherName" Type="nchar" MaxLength="100" />
+          <Property Name="FatherCN" Type="nchar" MaxLength="15" />
+          <Property Name="PermanentAddress" Type="varchar" MaxLength="250" />
+          <Property Name="TemporaryAddress" Type="varchar" MaxLength="250" />
+          <Property Name="ContactNo" Type="nchar" MaxLength="15" />
+          <Property Name="EmailID" Type="varchar" MaxLength="250" />
+          <Property Name="DOB" Type="datetime" />
+          <Property Name="Gender" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="AdmissionDate" Type="datetime" Nullable="false" />
+          <Property Name="Session" Type="nchar" MaxLength="15" Nullable="false" />
+          <Property Name="Caste" Type="nchar" MaxLength="15" Nullable="false" />
+          <Property Name="Religion" Type="nchar" MaxLength="15" Nullable="false" />
+          <Property Name="Photo" Type="image" Nullable="false" />
+          <Property Name="Status" Type="nchar" MaxLength="15" Nullable="false" />
+          <Property Name="Nationality" Type="nchar" MaxLength="100" />
+          <Property Name="Class" Type="nchar" MaxLength="20" />
+          <Property Name="Section" Type="nchar" MaxLength="30" />
+          <Property Name="SchoolID" Type="int" />
+        </EntityType>
+        <EntityType Name="Subject">
+          <Key>
+            <PropertyRef Name="SubjectCode" />
+          </Key>
+          <Property Name="SubjectCode" Type="nchar" MaxLength="20" Nullable="false" />
+          <Property Name="SubjectName" Type="varchar" MaxLength="250" />
+          <Property Name="ClassName" Type="nchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="Supplier">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="SupplierName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Address" Type="nvarchar" MaxLength="50" />
+          <Property Name="ContactNo" Type="nvarchar" MaxLength="50" />
+          <Property Name="EmailID" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Transportation">
+          <Key>
+            <PropertyRef Name="RouteID" />
+          </Key>
+          <Property Name="RouteID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SourceLocation" Type="varchar" MaxLength="250" />
+          <Property Name="BusCharges" Type="int" />
+        </EntityType>
+        <EntityType Name="User_Registration">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="UserID" Type="nchar" MaxLength="150" Nullable="false" />
+          <Property Name="Password" Type="nchar" MaxLength="30" Nullable="false" />
+          <Property Name="Name" Type="nchar" MaxLength="30" Nullable="false" />
+          <Property Name="Contact_No" Type="nchar" MaxLength="20" Nullable="false" />
+          <Property Name="Email" Type="nchar" MaxLength="30" />
+          <Property Name="Date_of_joining" Type="nchar" MaxLength="30" Nullable="false" />
+          <Property Name="usertype" Type="nchar" MaxLength="30" Nullable="false" />
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="UnderUser" Type="nchar" MaxLength="30" />
+        </EntityType>
+        <Association Name="FK_Attendence_Student">
+          <End Role="Student" Type="Self.Student" Multiplicity="0..1" />
+          <End Role="Attendance" Type="Self.Attendance" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Student">
+              <PropertyRef Name="AdmissionNo" />
+            </Principal>
+            <Dependent Role="Attendance">
+              <PropertyRef Name="AdmissionNo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Attendence_Subject">
+          <End Role="Subject" Type="Self.Subject" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Attendance" Type="Self.Attendance" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Subject">
+              <PropertyRef Name="SubjectCode" />
+            </Principal>
+            <Dependent Role="Attendance">
+              <PropertyRef Name="SubjectCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BookIssueStaff_Book">
+          <End Role="Book" Type="Self.Book" Multiplicity="0..1" />
+          <End Role="BookIssueStaff" Type="Self.BookIssueStaff" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Book">
+              <PropertyRef Name="AccessionNo" />
+            </Principal>
+            <Dependent Role="BookIssueStaff">
+              <PropertyRef Name="AccessionNo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BookIssueStaff_Employee">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="0..1" />
+          <End Role="BookIssueStaff" Type="Self.BookIssueStaff" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="StaffID" />
+            </Principal>
+            <Dependent Role="BookIssueStaff">
+              <PropertyRef Name="StaffID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <!--Errors Found During Generation:
+error 6004: The table 'SchoolManagment.dbo.BusHolders' is referenced by a relationship, but cannot be found.
+        <Association Name="FK_BusHolders_Student" />-->
+        <Association Name="FK_CourseFee_Class">
+          <End Role="Class" Type="Self.Class" Multiplicity="0..1" />
+          <End Role="CourseFee" Type="Self.CourseFee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Class">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CourseFee">
+              <PropertyRef Name="ClassID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CourseFee_Fee">
+          <End Role="Fee" Type="Self.Fee" Multiplicity="0..1" />
+          <End Role="CourseFee" Type="Self.CourseFee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Fee">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CourseFee">
+              <PropertyRef Name="FeeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HostelFeePayment_Student">
+          <End Role="Student" Type="Self.Student" Multiplicity="0..1" />
+          <End Role="HostelFeePayment" Type="Self.HostelFeePayment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Student">
+              <PropertyRef Name="AdmissionNo" />
+            </Principal>
+            <Dependent Role="HostelFeePayment">
+              <PropertyRef Name="AdmissionNo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Student_Schoolnfo">
+          <End Role="School" Type="Self.School" Multiplicity="0..1" />
+          <End Role="Student" Type="Self.Student" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="School">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Student">
+              <PropertyRef Name="SchoolID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="CreateSupplier" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="nvarchar" Mode="In" />
+          <Parameter Name="name" Type="nvarchar" Mode="In" />
+          <Parameter Name="address" Type="nvarchar" Mode="In" />
+          <Parameter Name="contact" Type="nvarchar" Mode="In" />
+          <Parameter Name="emailID" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="DeleteSupplier" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="EditSupplier" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="nvarchar" Mode="In" />
+          <Parameter Name="name" Type="nvarchar" Mode="In" />
+          <Parameter Name="address" Type="nvarchar" Mode="In" />
+          <Parameter Name="contact" Type="nvarchar" Mode="In" />
+          <Parameter Name="emailID" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+        <Function Name="GetAllSuppliers" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="GetSupplierById" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <EntityContainer Name="SchoolManagmentModelStoreContainer">
+          <EntitySet Name="Attendance" EntityType="Self.Attendance" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Book" EntityType="Self.Book" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BookIssueStaff" EntityType="Self.BookIssueStaff" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BookReturnStudent" EntityType="Self.BookReturnStudent" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Class" EntityType="Self.Class" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CourseFee" EntityType="Self.CourseFee" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Department" EntityType="Self.Department" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Employee" EntityType="Self.Employee" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Event" EntityType="Self.Event" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Exams" EntityType="Self.Exams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Fee" EntityType="Self.Fee" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Grades" EntityType="Self.Grades" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HostelFeePayment" EntityType="Self.HostelFeePayment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HostelInfo" EntityType="Self.HostelInfo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MarksEntry" EntityType="Self.MarksEntry" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Scholarship" EntityType="Self.Scholarship" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="School" EntityType="Self.School" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Student" EntityType="Self.Student" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Subject" EntityType="Self.Subject" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Supplier" EntityType="Self.Supplier" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Transportation" EntityType="Self.Transportation" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User_Registration" EntityType="Self.User_Registration" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Attendence_Student" Association="Self.FK_Attendence_Student">
+            <End Role="Student" EntitySet="Student" />
+            <End Role="Attendance" EntitySet="Attendance" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Attendence_Subject" Association="Self.FK_Attendence_Subject">
+            <End Role="Subject" EntitySet="Subject" />
+            <End Role="Attendance" EntitySet="Attendance" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BookIssueStaff_Book" Association="Self.FK_BookIssueStaff_Book">
+            <End Role="Book" EntitySet="Book" />
+            <End Role="BookIssueStaff" EntitySet="BookIssueStaff" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BookIssueStaff_Employee" Association="Self.FK_BookIssueStaff_Employee">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="BookIssueStaff" EntitySet="BookIssueStaff" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CourseFee_Class" Association="Self.FK_CourseFee_Class">
+            <End Role="Class" EntitySet="Class" />
+            <End Role="CourseFee" EntitySet="CourseFee" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CourseFee_Fee" Association="Self.FK_CourseFee_Fee">
+            <End Role="Fee" EntitySet="Fee" />
+            <End Role="CourseFee" EntitySet="CourseFee" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HostelFeePayment_Student" Association="Self.FK_HostelFeePayment_Student">
+            <End Role="Student" EntitySet="Student" />
+            <End Role="HostelFeePayment" EntitySet="HostelFeePayment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Student_Schoolnfo" Association="Self.FK_Student_Schoolnfo">
+            <End Role="School" EntitySet="School" />
+            <End Role="Student" EntitySet="Student" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="SchoolManagmentModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Attendance">
+          <Key>
+            <PropertyRef Name="AttendanceID" />
+          </Key>
+          <Property Name="AttendanceID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Class" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Name="Session" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Section" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="SubjectCode" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Name="StaffID" Type="String" MaxLength="15" FixedLength="true" Unicode="true" />
+          <Property Name="AttendanceDate" Type="DateTime" Precision="3" />
+          <Property Name="AdmissionNo" Type="String" MaxLength="15" FixedLength="true" Unicode="true" />
+          <Property Name="Status" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="Student" Relationship="Self.FK_Attendence_Student" FromRole="Attendance" ToRole="Student" />
+          <NavigationProperty Name="Subject" Relationship="Self.FK_Attendence_Subject" FromRole="Attendance" ToRole="Subject" />
+        </EntityType>
+        <EntityType Name="Book">
+          <Key>
+            <PropertyRef Name="AccessionNo" />
+          </Key>
+          <Property Name="AccessionNo" Type="String" MaxLength="30" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="BookTitle" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
+          <Property Name="Author" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
+          <Property Name="JointAuthors" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
+          <Property Name="Subject" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
+          <Property Name="Department" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
+          <Property Name="Barcode" Type="String" MaxLength="70" FixedLength="true" Unicode="true" />
+          <Property Name="ISBN" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
+          <Property Name="Volume" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
+          <Property Name="Edition" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
+          <Property Name="Publisher" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
+          <Property Name="PlaceOfPublisher" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
+          <Property Name="CD" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="PublishingYear" Type="Int32" />
+          <Property Name="Reference" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="AlmiraPosition" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
+          <Property Name="Price" Type="Int32" />
+          <Property Name="SupplierName" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
+          <Property Name="BillDate" Type="DateTime" Precision="3" />
+          <Property Name="Remarks" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="BookIssueStaffs" Relationship="Self.FK_BookIssueStaff_Book" FromRole="Book" ToRole="BookIssueStaff" />
+        </EntityType>
+        <EntityType Name="BookIssueStaff">
+          <Key>
+            <PropertyRef Name="TransactionID" />
+          </Key>
+          <Property Name="TransactionID" Type="String" MaxLength="15" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="IssueDate" Type="DateTime" Precision="3" />
+          <Property Name="DueDate" Type="DateTime" Precision="3" />
+          <Property Name="AccessionNo" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
+          <Property Name="StaffID" Type="String" MaxLength="15" FixedLength="true" Unicode="true" />
+          <Property Name="Status" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="Book" Relationship="Self.FK_BookIssueStaff_Book" FromRole="BookIssueStaff" ToRole="Book" />
+          <NavigationProperty Name="Employee" Relationship="Self.FK_BookIssueStaff_Employee" FromRole="BookIssueStaff" ToRole="Employee" />
+        </EntityType>
+        <EntityType Name="BookReturnStudent">
+          <Key>
+            <PropertyRef Name="ReturnID" />
+          </Key>
+          <Property Name="ReturnID" Type="String" MaxLength="15" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="TransactionID" Type="String" MaxLength="15" FixedLength="true" Unicode="true" />
+          <Property Name="ReturnDate" Type="DateTime" Precision="3" />
+          <Property Name="Fine" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Class">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ClassName" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Name="Section" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="CourseFees" Relationship="Self.FK_CourseFee_Class" FromRole="Class" ToRole="CourseFee" />
+        </EntityType>
+        <EntityType Name="CourseFee">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ClassID" Type="Int32" />
+          <Property Name="FeeID" Type="Int32" />
+          <Property Name="Fee" Type="Double" />
+          <Property Name="Month" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="Class" Relationship="Self.FK_CourseFee_Class" FromRole="CourseFee" ToRole="Class" />
+          <NavigationProperty Name="Fee1" Relationship="Self.FK_CourseFee_Fee" FromRole="CourseFee" ToRole="Fee" />
+        </EntityType>
+        <EntityType Name="Department">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DepartmentName" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="StaffID" />
+          </Key>
+          <Property Name="StaffID" Type="String" MaxLength="15" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="StaffName" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
+          <Property Name="FatherName" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
+          <Property Name="MotherName" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
+          <Property Name="DOB" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Name="PermanentAddress" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="TemporaryAddress" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="PhoneNo" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="MobileNo" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="DateOfJoining" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
+          <Property Name="Qualification" Type="String" MaxLength="70" FixedLength="true" Unicode="true" />
+          <Property Name="YearOfExperience" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="Designation" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
+          <Property Name="Picture" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="Status" Type="String" MaxLength="15" FixedLength="true" Unicode="true" />
+          <Property Name="BasicSalary" Type="Int32" />
+          <Property Name="Department" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Gender" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="BookIssueStaffs" Relationship="Self.FK_BookIssueStaff_Employee" FromRole="Employee" ToRole="BookIssueStaff" />
+        </EntityType>
+        <EntityType Name="Event">
+          <Key>
+            <PropertyRef Name="EventID" />
+          </Key>
+          <Property Name="EventID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EventName" Type="String" MaxLength="150" FixedLength="true" Unicode="true" />
+          <Property Name="StartingDate" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
+          <Property Name="StartingTime" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Name="EndingDate" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
+          <Property Name="EndingTime" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Name="ManagedBy" Type="String" MaxLength="250" FixedLength="true" Unicode="true" />
+          <Property Name="Activities" Type="String" MaxLength="250" FixedLength="true" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Exam">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ExamName" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
+          <Property Name="ExamType" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Fee">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Feename" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="CourseFees" Relationship="Self.FK_CourseFee_Fee" FromRole="Fee" ToRole="CourseFee" />
+        </EntityType>
+        <EntityType Name="Grade">
+          <Key>
+            <PropertyRef Name="GradeID" />
+          </Key>
+          <Property Name="GradeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Grade1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ScoreFrom" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="ScoreTo" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Remark" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="GradePoint" Type="Decimal" Precision="18" Scale="2" />
+        </EntityType>
+        <EntityType Name="HostelFeePayment">
+          <Key>
+            <PropertyRef Name="HFeePaymentID" />
+          </Key>
+          <Property Name="HFeePaymentID" Type="String" MaxLength="15" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="AdmissionNo" Type="String" MaxLength="15" FixedLength="true" Unicode="true" />
+          <Property Name="TotalPaid" Type="Int32" />
+          <Property Name="ModeOfPayment" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+          <Property Name="PaymentModeDetails" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Fine" Type="Int32" />
+          <Property Name="DueFees" Type="Int32" />
+          <Property Name="Dateofpayment" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
+          <Property Name="HostelFees" Type="Int32" />
+          <NavigationProperty Name="Student" Relationship="Self.FK_HostelFeePayment_Student" FromRole="HostelFeePayment" ToRole="Student" />
+        </EntityType>
+        <EntityType Name="HostelInfo">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="Hostelname" Type="String" MaxLength="150" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Hostel_Address" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Hostel_Phone" Type="String" MaxLength="15" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="ManagedBy" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+          <Property Name="Hostel_ContactNo" Type="String" MaxLength="15" FixedLength="true" Unicode="true" />
+          <Property Name="HostelFees" Type="Int32" />
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+        </EntityType>
+        <EntityType Name="MarksEntry">
+          <Key>
+            <PropertyRef Name="M_ID" />
+          </Key>
+          <Property Name="M_ID" Type="Int32" Nullable="false" />
+          <Property Name="AdmissionNo" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="StudentSchool" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Session" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="StudentClass" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="StudentSection" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="EntryDate" Type="DateTime" Precision="3" />
+          <Property Name="Result" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Scholarship">
+          <Key>
+            <PropertyRef Name="ScholarshipID" />
+          </Key>
+          <Property Name="ScholarshipID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ScholarshipName" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Amount" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+        </EntityType>
+        <EntityType Name="School">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SchoolName" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Address" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="ContactNo" Type="String" MaxLength="15" FixedLength="true" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
+          <Property Name="Fax" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="Website" Type="String" MaxLength="60" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="Students" Relationship="Self.FK_Student_Schoolnfo" FromRole="School" ToRole="Student" />
+        </EntityType>
+        <EntityType Name="Student">
+          <Key>
+            <PropertyRef Name="AdmissionNo" />
+          </Key>
+          <Property Name="AdmissionNo" Type="String" MaxLength="15" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="EnrollmentNo" Type="String" MaxLength="15" FixedLength="true" Unicode="true" />
+          <Property Name="StudentName" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+          <Property Name="FatherName" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+          <Property Name="MotherName" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+          <Property Name="FatherCN" Type="String" MaxLength="15" FixedLength="true" Unicode="true" />
+          <Property Name="PermanentAddress" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="TemporaryAddress" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="ContactNo" Type="String" MaxLength="15" FixedLength="true" Unicode="true" />
+          <Property Name="EmailID" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="DOB" Type="DateTime" Precision="3" />
+          <Property Name="Gender" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="AdmissionDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Session" Type="String" MaxLength="15" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Caste" Type="String" MaxLength="15" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Religion" Type="String" MaxLength="15" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Photo" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+          <Property Name="Status" Type="String" MaxLength="15" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Nationality" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+          <Property Name="Class" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Name="Section" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
+          <Property Name="SchoolID" Type="Int32" />
+          <NavigationProperty Name="Attendances" Relationship="Self.FK_Attendence_Student" FromRole="Student" ToRole="Attendance" />
+          <NavigationProperty Name="HostelFeePayments" Relationship="Self.FK_HostelFeePayment_Student" FromRole="Student" ToRole="HostelFeePayment" />
+          <NavigationProperty Name="School" Relationship="Self.FK_Student_Schoolnfo" FromRole="Student" ToRole="School" />
+        </EntityType>
+        <EntityType Name="Subject">
+          <Key>
+            <PropertyRef Name="SubjectCode" />
+          </Key>
+          <Property Name="SubjectCode" Type="String" MaxLength="20" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="SubjectName" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="ClassName" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="Attendances" Relationship="Self.FK_Attendence_Subject" FromRole="Subject" ToRole="Attendance" />
+        </EntityType>
+        <EntityType Name="Supplier">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="SupplierName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ContactNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="EmailID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Transportation">
+          <Key>
+            <PropertyRef Name="RouteID" />
+          </Key>
+          <Property Name="RouteID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SourceLocation" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="BusCharges" Type="Int32" />
+        </EntityType>
+        <EntityType Name="User_Registration">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="UserID" Type="String" MaxLength="150" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="30" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="30" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Contact_No" Type="String" MaxLength="20" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
+          <Property Name="Date_of_joining" Type="String" MaxLength="30" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="usertype" Type="String" MaxLength="30" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="UnderUser" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
+        </EntityType>
+        <Association Name="FK_Attendence_Student">
+          <End Role="Student" Type="Self.Student" Multiplicity="0..1" />
+          <End Role="Attendance" Type="Self.Attendance" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Student">
+              <PropertyRef Name="AdmissionNo" />
+            </Principal>
+            <Dependent Role="Attendance">
+              <PropertyRef Name="AdmissionNo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Attendence_Subject">
+          <End Role="Subject" Type="Self.Subject" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Attendance" Type="Self.Attendance" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Subject">
+              <PropertyRef Name="SubjectCode" />
+            </Principal>
+            <Dependent Role="Attendance">
+              <PropertyRef Name="SubjectCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BookIssueStaff_Book">
+          <End Role="Book" Type="Self.Book" Multiplicity="0..1" />
+          <End Role="BookIssueStaff" Type="Self.BookIssueStaff" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Book">
+              <PropertyRef Name="AccessionNo" />
+            </Principal>
+            <Dependent Role="BookIssueStaff">
+              <PropertyRef Name="AccessionNo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BookIssueStaff_Employee">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="0..1" />
+          <End Role="BookIssueStaff" Type="Self.BookIssueStaff" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="StaffID" />
+            </Principal>
+            <Dependent Role="BookIssueStaff">
+              <PropertyRef Name="StaffID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CourseFee_Class">
+          <End Role="Class" Type="Self.Class" Multiplicity="0..1" />
+          <End Role="CourseFee" Type="Self.CourseFee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Class">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CourseFee">
+              <PropertyRef Name="ClassID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CourseFee_Fee">
+          <End Role="Fee" Type="Self.Fee" Multiplicity="0..1" />
+          <End Role="CourseFee" Type="Self.CourseFee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Fee">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CourseFee">
+              <PropertyRef Name="FeeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HostelFeePayment_Student">
+          <End Role="Student" Type="Self.Student" Multiplicity="0..1" />
+          <End Role="HostelFeePayment" Type="Self.HostelFeePayment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Student">
+              <PropertyRef Name="AdmissionNo" />
+            </Principal>
+            <Dependent Role="HostelFeePayment">
+              <PropertyRef Name="AdmissionNo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Student_Schoolnfo">
+          <End Role="School" Type="Self.School" Multiplicity="0..1" />
+          <End Role="Student" Type="Self.Student" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="School">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Student">
+              <PropertyRef Name="SchoolID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="SchoolManagmentEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Attendances" EntityType="Self.Attendance" />
+          <EntitySet Name="Books" EntityType="Self.Book" />
+          <EntitySet Name="BookIssueStaffs" EntityType="Self.BookIssueStaff" />
+          <EntitySet Name="BookReturnStudents" EntityType="Self.BookReturnStudent" />
+          <EntitySet Name="Classes" EntityType="Self.Class" />
+          <EntitySet Name="CourseFees" EntityType="Self.CourseFee" />
+          <EntitySet Name="Departments" EntityType="Self.Department" />
+          <EntitySet Name="Employees" EntityType="Self.Employee" />
+          <EntitySet Name="Events" EntityType="Self.Event" />
+          <EntitySet Name="Exams" EntityType="Self.Exam" />
+          <EntitySet Name="Fees" EntityType="Self.Fee" />
+          <EntitySet Name="Grades" EntityType="Self.Grade" />
+          <EntitySet Name="HostelFeePayments" EntityType="Self.HostelFeePayment" />
+          <EntitySet Name="HostelInfoes" EntityType="Self.HostelInfo" />
+          <EntitySet Name="MarksEntries" EntityType="Self.MarksEntry" />
+          <EntitySet Name="Scholarships" EntityType="Self.Scholarship" />
+          <EntitySet Name="Schools" EntityType="Self.School" />
+          <EntitySet Name="Students" EntityType="Self.Student" />
+          <EntitySet Name="Subjects" EntityType="Self.Subject" />
+          <EntitySet Name="Suppliers" EntityType="Self.Supplier" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+          <EntitySet Name="Transportations" EntityType="Self.Transportation" />
+          <EntitySet Name="User_Registration" EntityType="Self.User_Registration" />
+          <AssociationSet Name="FK_Attendence_Student" Association="Self.FK_Attendence_Student">
+            <End Role="Student" EntitySet="Students" />
+            <End Role="Attendance" EntitySet="Attendances" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Attendence_Subject" Association="Self.FK_Attendence_Subject">
+            <End Role="Subject" EntitySet="Subjects" />
+            <End Role="Attendance" EntitySet="Attendances" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BookIssueStaff_Book" Association="Self.FK_BookIssueStaff_Book">
+            <End Role="Book" EntitySet="Books" />
+            <End Role="BookIssueStaff" EntitySet="BookIssueStaffs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BookIssueStaff_Employee" Association="Self.FK_BookIssueStaff_Employee">
+            <End Role="Employee" EntitySet="Employees" />
+            <End Role="BookIssueStaff" EntitySet="BookIssueStaffs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CourseFee_Class" Association="Self.FK_CourseFee_Class">
+            <End Role="Class" EntitySet="Classes" />
+            <End Role="CourseFee" EntitySet="CourseFees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CourseFee_Fee" Association="Self.FK_CourseFee_Fee">
+            <End Role="Fee" EntitySet="Fees" />
+            <End Role="CourseFee" EntitySet="CourseFees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HostelFeePayment_Student" Association="Self.FK_HostelFeePayment_Student">
+            <End Role="Student" EntitySet="Students" />
+            <End Role="HostelFeePayment" EntitySet="HostelFeePayments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Student_Schoolnfo" Association="Self.FK_Student_Schoolnfo">
+            <End Role="School" EntitySet="Schools" />
+            <End Role="Student" EntitySet="Students" />
+          </AssociationSet>
+          <FunctionImport Name="CreateSupplier">
+            <Parameter Name="id" Mode="In" Type="String" />
+            <Parameter Name="name" Mode="In" Type="String" />
+            <Parameter Name="address" Mode="In" Type="String" />
+            <Parameter Name="contact" Mode="In" Type="String" />
+            <Parameter Name="emailID" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="DeleteSupplier">
+            <Parameter Name="id" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="EditSupplier">
+            <Parameter Name="id" Mode="In" Type="String" />
+            <Parameter Name="name" Mode="In" Type="String" />
+            <Parameter Name="address" Mode="In" Type="String" />
+            <Parameter Name="contact" Mode="In" Type="String" />
+            <Parameter Name="emailID" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="GetAllSuppliers" ReturnType="Collection(SchoolManagmentModel.GetAllSuppliers_Result)" />
+          <FunctionImport Name="GetSupplierById" ReturnType="Collection(SchoolManagmentModel.GetSupplierById_Result)">
+            <Parameter Name="id" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_alterdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_creatediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_dropdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(SchoolManagmentModel.sp_helpdiagramdefinition_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(SchoolManagmentModel.sp_helpdiagrams_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_renamediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="new_diagramname" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_upgraddiagrams" />
+        </EntityContainer>
+        <ComplexType Name="GetAllSuppliers_Result">
+          <Property Type="String" Name="ID" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="SupplierName" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Address" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="ContactNo" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="EmailID" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="GetSupplierById_Result">
+          <Property Type="String" Name="ID" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="SupplierName" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Address" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="ContactNo" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="EmailID" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="sp_helpdiagramdefinition_Result">
+          <Property Type="Int32" Name="version" Nullable="true" />
+          <Property Type="Binary" Name="definition" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_helpdiagrams_Result">
+          <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+          <Property Type="Int32" Name="OwnerID" Nullable="false" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="SchoolManagmentModelStoreContainer" CdmEntityContainer="SchoolManagmentEntities">
+          <EntitySetMapping Name="Attendances">
+            <EntityTypeMapping TypeName="SchoolManagmentModel.Attendance">
+              <MappingFragment StoreEntitySet="Attendance">
+                <ScalarProperty Name="AttendanceID" ColumnName="AttendanceID" />
+                <ScalarProperty Name="Class" ColumnName="Class" />
+                <ScalarProperty Name="Session" ColumnName="Session" />
+                <ScalarProperty Name="Section" ColumnName="Section" />
+                <ScalarProperty Name="SubjectCode" ColumnName="SubjectCode" />
+                <ScalarProperty Name="StaffID" ColumnName="StaffID" />
+                <ScalarProperty Name="AttendanceDate" ColumnName="AttendanceDate" />
+                <ScalarProperty Name="AdmissionNo" ColumnName="AdmissionNo" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Books">
+            <EntityTypeMapping TypeName="SchoolManagmentModel.Book">
+              <MappingFragment StoreEntitySet="Book">
+                <ScalarProperty Name="AccessionNo" ColumnName="AccessionNo" />
+                <ScalarProperty Name="BookTitle" ColumnName="BookTitle" />
+                <ScalarProperty Name="Author" ColumnName="Author" />
+                <ScalarProperty Name="JointAuthors" ColumnName="JointAuthors" />
+                <ScalarProperty Name="Subject" ColumnName="Subject" />
+                <ScalarProperty Name="Department" ColumnName="Department" />
+                <ScalarProperty Name="Barcode" ColumnName="Barcode" />
+                <ScalarProperty Name="ISBN" ColumnName="ISBN" />
+                <ScalarProperty Name="Volume" ColumnName="Volume" />
+                <ScalarProperty Name="Edition" ColumnName="Edition" />
+                <ScalarProperty Name="Publisher" ColumnName="Publisher" />
+                <ScalarProperty Name="PlaceOfPublisher" ColumnName="PlaceOfPublisher" />
+                <ScalarProperty Name="CD" ColumnName="CD" />
+                <ScalarProperty Name="PublishingYear" ColumnName="PublishingYear" />
+                <ScalarProperty Name="Reference" ColumnName="Reference" />
+                <ScalarProperty Name="AlmiraPosition" ColumnName="AlmiraPosition" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="SupplierName" ColumnName="SupplierName" />
+                <ScalarProperty Name="BillDate" ColumnName="BillDate" />
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BookIssueStaffs">
+            <EntityTypeMapping TypeName="SchoolManagmentModel.BookIssueStaff">
+              <MappingFragment StoreEntitySet="BookIssueStaff">
+                <ScalarProperty Name="TransactionID" ColumnName="TransactionID" />
+                <ScalarProperty Name="IssueDate" ColumnName="IssueDate" />
+                <ScalarProperty Name="DueDate" ColumnName="DueDate" />
+                <ScalarProperty Name="AccessionNo" ColumnName="AccessionNo" />
+                <ScalarProperty Name="StaffID" ColumnName="StaffID" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BookReturnStudents">
+            <EntityTypeMapping TypeName="SchoolManagmentModel.BookReturnStudent">
+              <MappingFragment StoreEntitySet="BookReturnStudent">
+                <ScalarProperty Name="ReturnID" ColumnName="ReturnID" />
+                <ScalarProperty Name="TransactionID" ColumnName="TransactionID" />
+                <ScalarProperty Name="ReturnDate" ColumnName="ReturnDate" />
+                <ScalarProperty Name="Fine" ColumnName="Fine" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Classes">
+            <EntityTypeMapping TypeName="SchoolManagmentModel.Class">
+              <MappingFragment StoreEntitySet="Class">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ClassName" ColumnName="ClassName" />
+                <ScalarProperty Name="Section" ColumnName="Section" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CourseFees">
+            <EntityTypeMapping TypeName="SchoolManagmentModel.CourseFee">
+              <MappingFragment StoreEntitySet="CourseFee">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ClassID" ColumnName="ClassID" />
+                <ScalarProperty Name="FeeID" ColumnName="FeeID" />
+                <ScalarProperty Name="Fee" ColumnName="Fee" />
+                <ScalarProperty Name="Month" ColumnName="Month" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Departments">
+            <EntityTypeMapping TypeName="SchoolManagmentModel.Department">
+              <MappingFragment StoreEntitySet="Department">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="DepartmentName" ColumnName="DepartmentName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Employees">
+            <EntityTypeMapping TypeName="SchoolManagmentModel.Employee">
+              <MappingFragment StoreEntitySet="Employee">
+                <ScalarProperty Name="StaffID" ColumnName="StaffID" />
+                <ScalarProperty Name="StaffName" ColumnName="StaffName" />
+                <ScalarProperty Name="FatherName" ColumnName="FatherName" />
+                <ScalarProperty Name="MotherName" ColumnName="MotherName" />
+                <ScalarProperty Name="DOB" ColumnName="DOB" />
+                <ScalarProperty Name="PermanentAddress" ColumnName="PermanentAddress" />
+                <ScalarProperty Name="TemporaryAddress" ColumnName="TemporaryAddress" />
+                <ScalarProperty Name="PhoneNo" ColumnName="PhoneNo" />
+                <ScalarProperty Name="MobileNo" ColumnName="MobileNo" />
+                <ScalarProperty Name="DateOfJoining" ColumnName="DateOfJoining" />
+                <ScalarProperty Name="Qualification" ColumnName="Qualification" />
+                <ScalarProperty Name="YearOfExperience" ColumnName="YearOfExperience" />
+                <ScalarProperty Name="Designation" ColumnName="Designation" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Picture" ColumnName="Picture" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="BasicSalary" ColumnName="BasicSalary" />
+                <ScalarProperty Name="Department" ColumnName="Department" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Events">
+            <EntityTypeMapping TypeName="SchoolManagmentModel.Event">
+              <MappingFragment StoreEntitySet="Event">
+                <ScalarProperty Name="EventID" ColumnName="EventID" />
+                <ScalarProperty Name="EventName" ColumnName="EventName" />
+                <ScalarProperty Name="StartingDate" ColumnName="StartingDate" />
+                <ScalarProperty Name="StartingTime" ColumnName="StartingTime" />
+                <ScalarProperty Name="EndingDate" ColumnName="EndingDate" />
+                <ScalarProperty Name="EndingTime" ColumnName="EndingTime" />
+                <ScalarProperty Name="ManagedBy" ColumnName="ManagedBy" />
+                <ScalarProperty Name="Activities" ColumnName="Activities" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Exams">
+            <EntityTypeMapping TypeName="SchoolManagmentModel.Exam">
+              <MappingFragment StoreEntitySet="Exams">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ExamName" ColumnName="ExamName" />
+                <ScalarProperty Name="ExamType" ColumnName="ExamType" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Fees">
+            <EntityTypeMapping TypeName="SchoolManagmentModel.Fee">
+              <MappingFragment StoreEntitySet="Fee">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Feename" ColumnName="Feename" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Grades">
+            <EntityTypeMapping TypeName="SchoolManagmentModel.Grade">
+              <MappingFragment StoreEntitySet="Grades">
+                <ScalarProperty Name="GradeID" ColumnName="GradeID" />
+                <ScalarProperty Name="Grade1" ColumnName="Grade" />
+                <ScalarProperty Name="ScoreFrom" ColumnName="ScoreFrom" />
+                <ScalarProperty Name="ScoreTo" ColumnName="ScoreTo" />
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
+                <ScalarProperty Name="GradePoint" ColumnName="GradePoint" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HostelFeePayments">
+            <EntityTypeMapping TypeName="SchoolManagmentModel.HostelFeePayment">
+              <MappingFragment StoreEntitySet="HostelFeePayment">
+                <ScalarProperty Name="HFeePaymentID" ColumnName="HFeePaymentID" />
+                <ScalarProperty Name="AdmissionNo" ColumnName="AdmissionNo" />
+                <ScalarProperty Name="TotalPaid" ColumnName="TotalPaid" />
+                <ScalarProperty Name="ModeOfPayment" ColumnName="ModeOfPayment" />
+                <ScalarProperty Name="PaymentModeDetails" ColumnName="PaymentModeDetails" />
+                <ScalarProperty Name="Fine" ColumnName="Fine" />
+                <ScalarProperty Name="DueFees" ColumnName="DueFees" />
+                <ScalarProperty Name="Dateofpayment" ColumnName="Dateofpayment" />
+                <ScalarProperty Name="HostelFees" ColumnName="HostelFees" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HostelInfoes">
+            <EntityTypeMapping TypeName="SchoolManagmentModel.HostelInfo">
+              <MappingFragment StoreEntitySet="HostelInfo">
+                <ScalarProperty Name="Hostelname" ColumnName="Hostelname" />
+                <ScalarProperty Name="Hostel_Address" ColumnName="Hostel_Address" />
+                <ScalarProperty Name="Hostel_Phone" ColumnName="Hostel_Phone" />
+                <ScalarProperty Name="ManagedBy" ColumnName="ManagedBy" />
+                <ScalarProperty Name="Hostel_ContactNo" ColumnName="Hostel_ContactNo" />
+                <ScalarProperty Name="HostelFees" ColumnName="HostelFees" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MarksEntries">
+            <EntityTypeMapping TypeName="SchoolManagmentModel.MarksEntry">
+              <MappingFragment StoreEntitySet="MarksEntry">
+                <ScalarProperty Name="M_ID" ColumnName="M_ID" />
+                <ScalarProperty Name="AdmissionNo" ColumnName="AdmissionNo" />
+                <ScalarProperty Name="StudentSchool" ColumnName="StudentSchool" />
+                <ScalarProperty Name="Session" ColumnName="Session" />
+                <ScalarProperty Name="StudentClass" ColumnName="StudentClass" />
+                <ScalarProperty Name="StudentSection" ColumnName="StudentSection" />
+                <ScalarProperty Name="EntryDate" ColumnName="EntryDate" />
+                <ScalarProperty Name="Result" ColumnName="Result" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Scholarships">
+            <EntityTypeMapping TypeName="SchoolManagmentModel.Scholarship">
+              <MappingFragment StoreEntitySet="Scholarship">
+                <ScalarProperty Name="ScholarshipID" ColumnName="ScholarshipID" />
+                <ScalarProperty Name="ScholarshipName" ColumnName="ScholarshipName" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Schools">
+            <EntityTypeMapping TypeName="SchoolManagmentModel.School">
+              <MappingFragment StoreEntitySet="School">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="SchoolName" ColumnName="SchoolName" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="ContactNo" ColumnName="ContactNo" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Fax" ColumnName="Fax" />
+                <ScalarProperty Name="Website" ColumnName="Website" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Students">
+            <EntityTypeMapping TypeName="SchoolManagmentModel.Student">
+              <MappingFragment StoreEntitySet="Student">
+                <ScalarProperty Name="AdmissionNo" ColumnName="AdmissionNo" />
+                <ScalarProperty Name="EnrollmentNo" ColumnName="EnrollmentNo" />
+                <ScalarProperty Name="StudentName" ColumnName="StudentName" />
+                <ScalarProperty Name="FatherName" ColumnName="FatherName" />
+                <ScalarProperty Name="MotherName" ColumnName="MotherName" />
+                <ScalarProperty Name="FatherCN" ColumnName="FatherCN" />
+                <ScalarProperty Name="PermanentAddress" ColumnName="PermanentAddress" />
+                <ScalarProperty Name="TemporaryAddress" ColumnName="TemporaryAddress" />
+                <ScalarProperty Name="ContactNo" ColumnName="ContactNo" />
+                <ScalarProperty Name="EmailID" ColumnName="EmailID" />
+                <ScalarProperty Name="DOB" ColumnName="DOB" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="AdmissionDate" ColumnName="AdmissionDate" />
+                <ScalarProperty Name="Session" ColumnName="Session" />
+                <ScalarProperty Name="Caste" ColumnName="Caste" />
+                <ScalarProperty Name="Religion" ColumnName="Religion" />
+                <ScalarProperty Name="Photo" ColumnName="Photo" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Nationality" ColumnName="Nationality" />
+                <ScalarProperty Name="Class" ColumnName="Class" />
+                <ScalarProperty Name="Section" ColumnName="Section" />
+                <ScalarProperty Name="SchoolID" ColumnName="SchoolID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Subjects">
+            <EntityTypeMapping TypeName="SchoolManagmentModel.Subject">
+              <MappingFragment StoreEntitySet="Subject">
+                <ScalarProperty Name="SubjectCode" ColumnName="SubjectCode" />
+                <ScalarProperty Name="SubjectName" ColumnName="SubjectName" />
+                <ScalarProperty Name="ClassName" ColumnName="ClassName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Suppliers">
+            <EntityTypeMapping TypeName="SchoolManagmentModel.Supplier">
+              <MappingFragment StoreEntitySet="Supplier">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="SupplierName" ColumnName="SupplierName" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="ContactNo" ColumnName="ContactNo" />
+                <ScalarProperty Name="EmailID" ColumnName="EmailID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="SchoolManagmentModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Transportations">
+            <EntityTypeMapping TypeName="SchoolManagmentModel.Transportation">
+              <MappingFragment StoreEntitySet="Transportation">
+                <ScalarProperty Name="RouteID" ColumnName="RouteID" />
+                <ScalarProperty Name="SourceLocation" ColumnName="SourceLocation" />
+                <ScalarProperty Name="BusCharges" ColumnName="BusCharges" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="User_Registration">
+            <EntityTypeMapping TypeName="SchoolManagmentModel.User_Registration">
+              <MappingFragment StoreEntitySet="User_Registration">
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Contact_No" ColumnName="Contact_No" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Date_of_joining" ColumnName="Date_of_joining" />
+                <ScalarProperty Name="usertype" ColumnName="usertype" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="UnderUser" ColumnName="UnderUser" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="CreateSupplier" FunctionName="SchoolManagmentModel.Store.CreateSupplier" />
+          <FunctionImportMapping FunctionImportName="DeleteSupplier" FunctionName="SchoolManagmentModel.Store.DeleteSupplier" />
+          <FunctionImportMapping FunctionImportName="EditSupplier" FunctionName="SchoolManagmentModel.Store.EditSupplier" />
+          <FunctionImportMapping FunctionImportName="GetAllSuppliers" FunctionName="SchoolManagmentModel.Store.GetAllSuppliers">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SchoolManagmentModel.GetAllSuppliers_Result">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="SupplierName" ColumnName="SupplierName" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="ContactNo" ColumnName="ContactNo" />
+                <ScalarProperty Name="EmailID" ColumnName="EmailID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetSupplierById" FunctionName="SchoolManagmentModel.Store.GetSupplierById">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SchoolManagmentModel.GetSupplierById_Result">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="SupplierName" ColumnName="SupplierName" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="ContactNo" ColumnName="ContactNo" />
+                <ScalarProperty Name="EmailID" ColumnName="EmailID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="SchoolManagmentModel.Store.sp_alterdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="SchoolManagmentModel.Store.sp_creatediagram" />
+          <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="SchoolManagmentModel.Store.sp_dropdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="SchoolManagmentModel.Store.sp_helpdiagramdefinition">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SchoolManagmentModel.sp_helpdiagramdefinition_Result">
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="SchoolManagmentModel.Store.sp_helpdiagrams">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SchoolManagmentModel.sp_helpdiagrams_Result">
+                <ScalarProperty Name="Database" ColumnName="Database" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Owner" ColumnName="Owner" />
+                <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="SchoolManagmentModel.Store.sp_renamediagram" />
+          <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="SchoolManagmentModel.Store.sp_upgraddiagrams" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
